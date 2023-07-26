@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="customer_support_app:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>customer_support_app</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="customer_support_app-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="customer_support_app:war exploded" />
+    </root>
+  </artifact>
+</component>
