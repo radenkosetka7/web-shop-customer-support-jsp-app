@@ -1,16 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 7/26/2023
-  Time: 2:55 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%
+    session.invalidate();
+    response.sendRedirect("login.jsp");
+%>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Sign out</title>
 </head>
 <body>
-<h2>Ne valjaaaa</h2>
+
 </body>
 </html>

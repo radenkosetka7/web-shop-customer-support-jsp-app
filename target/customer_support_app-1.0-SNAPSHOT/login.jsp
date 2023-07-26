@@ -1,4 +1,3 @@
-<%@page import="com.example.customer_support_app.services.UserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.example.customer_support_app.beans.UserBean" %>
 <jsp:useBean id="userBean" class="com.example.customer_support_app.beans.UserBean" scope="session"/>
@@ -7,38 +6,67 @@
 <jsp:setProperty property="username" name="userBean" param="username" />
 <jsp:setProperty property="password" name="userBean" param="password" />
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Administratorska aplikacija</title>
-</head>
-<body>
 <%
-    if (request.getParameter("submitted") != null) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        userBean = userService.getUser(username, password);
-
-        if (userBean != null) {
+    if (request.getParameter("submit") != null) {
+        UserBean user = userService.getUser(userBean.getUsername(),userBean.getPassword());
+        if(user != null)
+        {
+            userBean.setFirstName(user.getFirstName());
+            userBean.setLastName(user.getLastName());
+            userBean.setLoggedIn(true);
+            session.setAttribute("notification","");
             response.sendRedirect("home.jsp");
-
-        } else {
-            response.sendRedirect("logout.jsp");
-
+        }
+        else {
+            session.setAttribute("notification","Incorrect username and password");
+            userBean.setLoggedIn(false);
         }
     }
+    else
+    {
+        session.setAttribute("notification","");
+    }
 %>
-<h2>Prijavi se</h2>
-<form method="post" action="login.jsp">
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Z2lKjyRV7zF7Xjz7DjB1BmkLqbo5P9Q1roMgPMbbPu34Df" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/login.css">
 
-    <label for="username">Korisnicko ime:</label>
-    <input type="text" id="username" name="username" required>
-    <br>
-    <label for="password">Lozinka:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <input type="hidden" name="submitted" value="true">
-    <input type="submit" value="Prijavi se">
-</form>
+    <script>
+        function hideNotification() {
+            var notificationElement = document.getElementById('notificationMessage');
+            if (notificationElement) {
+                notificationElement.style.display = 'none';
+            }
+        }
+
+        setTimeout(hideNotification, 2000);
+    </script>
+
+
+    </head>
+<body>
+
+
+<div class="login-box">
+    <h2>Login Page</h2>
+    <form>
+        <div class="user-box">
+            <input type="text" id="username" name="username" required>
+            <label>Username</label>
+        </div>
+        <div class="user-box">
+            <input type="password" id="password" name="password" required>
+            <label>Password</label>
+        </div>
+        <button class="btn" name="submit" type="submit">Sign in</button>
+        <h5 id="notificationMessage" class="h5"><%=session.getAttribute("notification").toString()%>
+        </h5>
+    </form>
+</div>
+
+
+
 </body>
 </html>
