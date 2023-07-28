@@ -13,7 +13,7 @@ public class MessageDAO {
 
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
     private static final String SQL_SELECT_ALL = "SELECT m.id, m.question, m.status, mail FROM web_shop.message m INNER JOIN user u WHERE m.user_id=u.id;";
-    private static final String SQL_SELECT_BY_ID = "SELECT m.id, m.question, m.status, mail FROM web_shop.message m INNER JOIN user u ON m.user_id=u.id WHERE m.user_id=?";
+    private static final String SQL_SELECT_BY_ID = "SELECT m.id, m.question, m.status, mail FROM web_shop.message m INNER JOIN user u ON m.user_id=u.id WHERE m.id=?";
     private static final String SQL_UPDATE_STATUS = "UPDATE message m SET m.status=? WHERE m.id=?";
 
 

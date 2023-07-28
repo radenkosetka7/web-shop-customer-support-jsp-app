@@ -54,7 +54,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Customer Support</h2>
+                        <h2>Customer Support Messages</h2>
                     </div>
                     <div class="col-sm-6">
                         <div class="search-box">
@@ -85,7 +85,7 @@
                     <td><%=messageBean.getStatus() ? "Yes":"No"%>
                     </td>
                     <td>
-                        <a href="#" class="edit" title="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i>View</a>
+                        <button class="btn btn-primary view-button" onclick="location.href='message.jsp?id=<%=messageBean.getId()%>'" ><i class="material-icons">&#xE254;</i>View</button>
                     </td>
                 </tr>
                 <% } %>

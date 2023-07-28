@@ -37,7 +37,7 @@
     <script>
         function hideNotification() {
             var notificationElement = document.getElementById('notificationMessage');
-            if (notificationElement) {
+            if (notificationElement.textContent.trim() !== '') {
                 notificationElement.style.display = 'none';
             }
         }
