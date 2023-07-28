@@ -28,6 +28,7 @@
     }
 %>
 <html lang="en">
+<head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Z2lKjyRV7zF7Xjz7DjB1BmkLqbo5P9Q1roMgPMbbPu34Df" crossorigin="anonymous">

@@ -4,121 +4,95 @@
 <jsp:useBean id="userBean" class="com.example.customer_support_app.beans.UserBean" scope="session"/>
 <jsp:useBean id="messageService" class="com.example.customer_support_app.services.MessageService" scope="application"/>
 
+<!DOCTYPE html>
+<%
+    if (!userBean.getLoggedIn())
+        response.sendRedirect("login.jsp");
+%>
+
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Home</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="styles/table.css">
 
+    <script>
+        $(document).ready(function(){
+            // Activate tooltips
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Filter table rows based on searched term
+            $("#search").on("keyup", function() {
+                var term = $(this).val().toLowerCase();
+                $("table tbody tr").each(function(){
+                    $row = $(this);
+                    var name = $row.find("td:nth-child(2)").text().toLowerCase();
+                    console.log(name);
+                    if(name.search(term) < 0){
+                        $row.hide();
+                    } else{
+                        $row.show();
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
-<table class="table align-middle mb-0 bg-white">
-    <thead class="bg-light">
-    <tr>
-        <th>Name</th>
-        <th>Title</th>
-        <th>Status</th>
-        <th>Position</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-            <div class="d-flex align-items-center">
-                <img
-                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                        class="rounded-circle"
-                />
-                <div class="ms-3">
-                    <p class="fw-bold mb-1">John Doe</p>
-                    <p class="text-muted mb-0">john.doe@gmail.com</p>
+<%@include file="WEB-INF/header.jsp"%>
+<div class="container-lg">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Customer Support</h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="search-box">
+                            <div class="input-group">
+                                <input type="text" id="search" class="form-control" placeholder="Search by content">
+                                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </td>
-        <td>
-            <p class="fw-normal mb-1">Software engineer</p>
-            <p class="text-muted mb-0">IT department</p>
-        </td>
-        <td>
-            <span class="badge badge-success rounded-pill d-inline">Active</span>
-        </td>
-        <td>Senior</td>
-        <td>
-            <button type="button" class="btn btn-link btn-sm btn-rounded">
-                Edit
-            </button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="d-flex align-items-center">
-                <img
-                        src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                        class="rounded-circle"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                />
-                <div class="ms-3">
-                    <p class="fw-bold mb-1">Alex Ray</p>
-                    <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                </div>
-            </div>
-        </td>
-        <td>
-            <p class="fw-normal mb-1">Consultant</p>
-            <p class="text-muted mb-0">Finance</p>
-        </td>
-        <td>
-        <span class="badge badge-primary rounded-pill d-inline"
-        >Onboarding</span
-        >
-        </td>
-        <td>Junior</td>
-        <td>
-            <button
-                    type="button"
-                    class="btn btn-link btn-rounded btn-sm fw-bold"
-                    data-mdb-ripple-color="dark"
-            >
-                Edit
-            </button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div class="d-flex align-items-center">
-                <img
-                        src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                        class="rounded-circle"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                />
-                <div class="ms-3">
-                    <p class="fw-bold mb-1">Kate Hunington</p>
-                    <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                </div>
-            </div>
-        </td>
-        <td>
-            <p class="fw-normal mb-1">Designer</p>
-            <p class="text-muted mb-0">UI/UX</p>
-        </td>
-        <td>
-            <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-        </td>
-        <td>Senior</td>
-        <td>
-            <button
-                    type="button"
-                    class="btn btn-link btn-rounded btn-sm fw-bold"
-                    data-mdb-ripple-color="dark"
-            >
-                Edit
-            </button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th style="width: 22%;">Question</th>
+                    <th style="width: fit-content;">User e-mail</th>
+                    <th>Read</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for(MessageBean messageBean:messageService.getAllMessages()) {%>
+                <tr>
+                    <td><%=messageBean.getId()%></td>
+                    <td style="word-wrap: break-word"><%=messageBean.getQuestion()%></td>
+                    <td><%=messageBean.getRecipientMail()%></td>
+                    <td><%=messageBean.getStatus() ? "Yes":"No"%>
+                    </td>
+                    <td>
+                        <a href="#" class="edit" title="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i>View</a>
+                    </td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
 </html>
