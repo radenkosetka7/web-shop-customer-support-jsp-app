@@ -66,7 +66,7 @@ public class MessageDAO {
         Connection c = null;
         ResultSet rs = null;
         PreparedStatement ps=null;
-        List<MessageBean> messages = new ArrayList<>();
+        MessageBean messageBean=null;
 
         try {
             c = connectionPool.checkOut();
@@ -74,7 +74,7 @@ public class MessageDAO {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                messages.add(new MessageBean(rs.getInt("id"), rs.getString("question"), rs.getBoolean("status"), rs.getString("mail")));
+                messageBean=new MessageBean(rs.getInt("id"), rs.getString("question"), rs.getBoolean("status"), rs.getString("mail"));
             }
             ps.close();
         } catch (SQLException e) {
@@ -82,7 +82,7 @@ public class MessageDAO {
         } finally {
             connectionPool.checkIn(c);
         }
-        return messages.get(0);
+        return messageBean;
     }
 
 }
