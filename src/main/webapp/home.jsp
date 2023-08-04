@@ -67,13 +67,6 @@
                     <div class="col-sm-6">
                         <h2>Customer Support Messages</h2>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="search-box">
-                            <div class="input-group">
-                                <input type="text" id="search" class="form-control" placeholder="Search by content">
-                                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
