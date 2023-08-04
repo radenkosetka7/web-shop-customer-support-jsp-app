@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class UserDAO {
 
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
-    private static final String SELECT_USER_BY_USERNAME = "SELECT * FROM web_shop.user WHERE status=1 and role=1 and username=?";
+    private static final String SELECT_USER_BY_USERNAME = "SELECT * FROM web_shop.user WHERE status=1 and role=1 and BINARY username=?";
     public UserDAO() {
         // TODO Auto-generated constructor stub
     }
