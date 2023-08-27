@@ -64,12 +64,10 @@
 <div class="card-body">
     <div class="card-body">
 <form>
-    <!-- Name input -->
     <div class="form-outline mb-4">
         <label class="form-label" for="form4Example1">From</label>
         <input style="width: 250px" disabled type="text" id="form4Example1" value="<%=messageBean.getRecipientMail()%>" class="form-control"/>
     </div>
-    <!-- Message input -->
     <div class="form-outline mb-4">
         <label class="form-label" for="form4Example3">Received question</label>
         <textarea disabled class="form-control" id="form4Example3" rows="4"><%=messageBean.getQuestion()%></textarea>

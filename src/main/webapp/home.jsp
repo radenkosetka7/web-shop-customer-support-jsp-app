@@ -35,24 +35,6 @@
         });
     </script>
 
-    <script>
-        $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();
-
-            $("#search").on("keyup", function() {
-                var term = $(this).val().toLowerCase();
-                $("table tbody tr").each(function(){
-                    $row = $(this);
-                    var name = $row.find("td:nth-child(2)").text().toLowerCase();
-                    if(name.search(term) < 0){
-                        $row.hide();
-                    } else{
-                        $row.show();
-                    }
-                });
-            });
-        });
-    </script>
 </head>
 <body>
 <%@include file="WEB-INF/header.jsp"%>
